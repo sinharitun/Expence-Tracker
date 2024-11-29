@@ -1,16 +1,9 @@
-# expencetracker
+Expense Tracking App
+An intuitive and user-friendly Expense Tracking App built using Flutter. This app helps users manage their finances efficiently by tracking daily expenses, categorizing transactions, and providing insightful reports.
 
-A new Flutter project.
+Features:-
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Add Transactions: Record expenses and income with ease.
+Categorization: Assign categories to transactions for better organization.
+Overview Dashboard: Get a quick summary of your financial activities.
+Expense Analysis: Visualize spending trends through charts and reports.

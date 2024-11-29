@@ -1,4 +1,4 @@
-import 'package:expencetracker/widget/widget_list/expence.dart';
+import 'package:expencetracker/widget/expence.dart';
 import 'package:flutter/material.dart';
 
 void main(){

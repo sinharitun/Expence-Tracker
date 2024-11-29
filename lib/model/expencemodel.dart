@@ -1,9 +1,19 @@
-//import "dart:ffi";
-
+import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import "package:uuid/uuid.dart"; // to automatically store unique value for id
+
+final formatter=DateFormat.yMd();
 
 const uuid=Uuid();
 enum Category{ food, travel, leisure, work}
+
+const categoryIcons={
+  Category.food : Icons.lunch_dining,
+  Category.travel: Icons.flight_takeoff,
+  Category.leisure: Icons.movie,
+  Category.work: Icons.work,
+
+};
 
 
 class Expencemodel {
@@ -20,4 +30,9 @@ class Expencemodel {
   final double amount;
   final DateTime date;
   final Category category;
+
+  String get formattedDate{
+    return formatter.format(date);
+  }
+
 }
