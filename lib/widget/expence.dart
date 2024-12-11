@@ -8,32 +8,74 @@ class Expences extends StatefulWidget {
   @override
   State<Expences> createState() {
     return _ExpenceState();
-  } 
+  }
 }
 
 class _ExpenceState extends State<Expences> {
   final List<Expencemodel> _registeredExpence = [
-    Expencemodel(
-        title: 'burger',
-        amount: 24.22,
-        date: DateTime.now(),
-        category: Category.food),
-    Expencemodel(
-        title: 'cinema',
-        amount: 100.22,
-        date: DateTime.now(),
-        category: Category.leisure)
+    // Expencemodel(
+    //     title: 'burger',
+    //     amount: 24.22,
+    //     date: DateTime.now(),
+    //     category: Category.food),
+    // Expencemodel(
+    //     title: 'cinema',
+    //     amount: 100.22,
+    //     date: DateTime.now(),
+    //     category: Category.leisure)
   ];
 
   void _openAddExpenceOverlay() {
     showModalBottomSheet(
+      isScrollControlled: true,
       context: context,
-      builder: (ctx) => const Newexpence(),
+      builder: (ctx) => Newexpence(
+        addExpance: _addExpance,
+      ),
+    );
+  }
+
+  void _addExpance(Expencemodel expencemodel) {
+    setState(() {
+      _registeredExpence.add(expencemodel);
+    });
+  }
+
+  void _removeExpence(Expencemodel expencemodel) {
+    final expenseIndex = _registeredExpence.indexOf(expencemodel);
+    setState(() {
+      _registeredExpence.remove(expencemodel);
+    });
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        duration: const Duration(seconds: 3),
+        content: const Text('Expance deleted'),
+        action: SnackBarAction(
+          label: "undo",
+          onPressed: () {
+            setState(() {
+              _registeredExpence.insert(expenseIndex, expencemodel);
+            });
+          },
+        ),
+      ),
     );
   }
 
   @override
   Widget build(BuildContext context) {
+    Widget mainContent = const Center(
+      child:
+          Text('No Expences is added yet. Start adding your expence to track'),
+    );
+
+    if (_registeredExpence.isNotEmpty) {
+      mainContent = ExpenceList(
+        expenceitem: _registeredExpence,
+        onRemoveExpence: _removeExpence,
+      );
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('PocketPilot'),
@@ -45,13 +87,7 @@ class _ExpenceState extends State<Expences> {
         ],
       ),
       body: Column(
-        children: [
-          const Text('chart'),
-          Expanded(
-              child: ExpenceList(
-            expenceitem: _registeredExpence,
-          ))
-        ],
+        children: [const Text('chart'), Expanded(child: mainContent)],
       ),
     );
   }
